@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contemplado Fácil - Simulação de Consórcio</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; color: #333; }
+        header { background-color: #007bff; color: white; padding: 1rem; text-align: center; }
+        nav { display: flex; justify-content: center; gap: 1rem; }
+        nav a { color: white; text-decoration: none; }
+        section { padding: 2rem; max-width: 1200px; margin: auto; }
+        .hero { text-align: center; background-color: #fff; padding: 2rem; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        .simulation { background-color: #fff; padding: 2rem; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        form { display: flex; flex-direction: column; gap: 1rem; }
+        input, select, button { padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px; }
+        button { background-color: #007bff; color: white; cursor: pointer; }
+        #result { margin-top: 1rem; font-weight: bold; }
+        footer { background-color: #333; color: white; text-align: center; padding: 1rem; }
+        .radio-group { display: flex; gap: 1rem; align-items: center; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Contemplado Fácil</h1>
+        <nav>
+            <a href="#home">Início</a>
+            <a href="#simulation">Simulação</a>
+            <a href="#about">Sobre</a>
+            <a href="#contact">Contato</a>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <h2>Simule Seu Consórcio com Credibilidade</h2>
+        <p>Descubra como um consórcio pode realizar seus sonhos de forma segura e regulamentada pelo Banco Central.</p>
+        <a href="#simulation"><button>Começar Simulação</button></a>
+    </section>
+
+    <section id="simulation" class="simulation">
+        <h2>Simulador de Consórcio</h2>
+        <form id="consorcioForm">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" required>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" required>
+            
+            <label for="telefone">Telefone:</label>
+            <input type="tel" id="telefone" required>
+            
+            <label for="renda">Renda Mensal (R$):</label>
+            <input type="number" id="renda" required>
+            
+            <label for="tipo">O que você pretende simular?</label>
+            <select id="tipo" required>
+                <option value="">Selecione</option>
+                <option value="imovel">Imóvel</option>
+                <option value="carros">Carros</option>
+                <option value="servicos">Serviços</option>
+            </select>
+            
+            <label>Já possui consórcio?</label>
+            <div class="radio-group">
+                <label><input type="radio" name="possui" value="sim" required> Sim</label>
+                <label><input type="radio" name="possui" value="nao" required> Não</label>
+            </div>
+            
+            <label>Já conhece consórcio?</label>
+            <div class="radio-group">
+                <label><input type="radio" name="conhece" value="sim" required> Sim</label>
+                <label><input type="radio" name="conhece" value="nao" required> Não</label>
+            </div>
+            
+            <label for="contemplacao">Quanto tempo você gostaria de ser contemplada?</label>
+            <select id="contemplacao" required>
+                <option value="">Selecione</option>
+                <option value="3meses">3 meses</option>
+                <option value="ate6meses">Até 6 meses</option>
+                <option value="pesquisando">Estou apenas pesquisando</option>
+            </select>
+            
+            <label for="valor">Valor do Bem (R$):</label>
+            <input type="number" id="valor" required>
+            
+            <label for="parcelas">Número de Parcelas:</label>
+            <input type="number" id="parcelas" required>
+            
+            <button type="submit">Calcular e Enviar</button>
+        </form>
+        <div id="result"></div>
+    </section>
+
+    <section id="about">
+        <h2>Sobre Nós</h2>
+        <p>Somos uma empresa regulamentada, oferecendo consórcios transparentes e seguros. Benefícios incluem sorteios mensais e assembleias democráticas.</p>
+        <p><strong>Regulamentação:</strong> Aprovado pelo Banco Central do Brasil.</p>
+    </section>
+
+    <section id="contact">
+        <h2>Contato</h2>
+        <p>Email: airon.fdiguacu@embracon.com.br | Telefone: (73) 982383902</p>
+        <form>
+            <input type="text" placeholder="Nome" required>
+            <input type="email" placeholder="Email" required>
+            <textarea placeholder="Mensagem"></textarea>
+            <button type="submit">Enviar</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2023 Contemplado Fácil. Todos os direitos reservados. <a href="#">Política de Privacidade</a> | <a href="#">Termos de Uso</a></p>
+    </footer>
+
+    <script>
+        document.getElementById('consorcioForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const valor = parseFloat(document.getElementById('valor').value);
+            const parcelas = parseInt(document.getElementById('parcelas').value);
+            
+            // Coletar dados adicionais (para simulação ou envio futuro)
+            const nome = document.getElementById('nome').value;
+            const email = document.getElementById('email').value;
+            const telefone = document.getElementById('telefone').value;
+            const renda = document.getElementById('renda').value;
+            const tipo = document.getElementById('tipo').value;
+            const possui = document.querySelector('input[name="possui"]:checked')?.value;
+            const conhece = document.querySelector('input[name="conhece"]:checked')?.value;
+            const contemplacao = document.getElementById('contemplacao').value;
+            
+            if (valor && parcelas && nome && email && telefone && renda && tipo && possui && conhece && contemplacao) {
+                const parcelaMensal = valor / parcelas;
+                const total = valor;
+                document.getElementById('result').innerHTML = `
+                    <p>Obrigado, ${nome}! Sua simulação foi processada.</p>
+                    <p>Parcela mensal aproximada: R$ ${parcelaMensal.toFixed(2)}</p>
+                    <p>Total a pagar: R$ ${total.toFixed(2)}</p>
+                    <p>Nota: Esta é uma simulação básica. Entraremos em contato em breve para mais detalhes.</p>
+                `;
+                // Aqui você pode adicionar código para enviar os dados para um servidor (ex.: via fetch para uma API)
+                console.log({ nome, email, telefone, renda, tipo, possui, conhece, contemplacao, valor, parcelas });
+            } else {
+                document.getElementById('result').innerHTML = '<p>Por favor, preencha todos os campos corretamente.</p>';
+            }
+        });
+    </script>
+</body>
+</html>
